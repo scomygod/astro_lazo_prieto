@@ -1,0 +1,11 @@
+---
+const { listName, proyectos } = Astro.props;
+---
+
+<h1>{listName}</h1>
+
+<ul>
+  {proyectos.map((p) => (
+    <li>{p.nombre} - {p.descripcion}</li>
+  ))}
+</ul>

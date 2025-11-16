@@ -1,6 +1,13 @@
 ---
+import ListadoProyectos from "../../components/listado-proyectos.astro";
 import NavBar from "../../components/nav-bar.astro";
 import Layout from "../../layouts/Layout.astro";
+
+const proyectos = [
+{id: 1, nombre: "Proyecto A", descripcion:"Descripción"},
+{id: 2, nombre: "Proyecto B", descripcion:"Otra descipción"}
+];
+
 ---
 
 <Layout title="Pagina Proyectos">
@@ -23,4 +30,8 @@ import Layout from "../../layouts/Layout.astro";
       </ul>
     </div>
   </section>
+  <ListadoProyectos
+    listName="Listado de proyectos" 
+    proyectos={proyectos}
+  />
 </Layout>
