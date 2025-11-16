@@ -1,0 +1,26 @@
+---
+import NavBar from "../../components/nav-bar.astro";
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Pagina Proyectos">
+  <NavBar />
+  <h1>Proyectos</h1>
+  <section>
+    <div>
+      <h3>Agregar Proyectos</h3>
+      <h4>Proyecto a agregar</h4>
+      <input type="text" placeholder="Nombre del proyecto" />
+      <input type="text" placeholder="Descripción del proyecto" />
+      <button type="submit">Agregar</button>
+      <button type="submit">Eliminar</button>
+    </div>
+    <div>
+      <h3>Listado</h3>
+      <ul>
+        <li>Proyecto 1</li>
+        <li>Proyecto 2</li>
+      </ul>
+    </div>
+  </section>
+</Layout>

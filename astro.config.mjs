@@ -1,8 +1,4 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-
 // Configuración de Astro para GitHub Pages
-export default defineConfig({
-  base: '/astro_lazo_prieto/',
-
-});
+export default defineConfig({});
