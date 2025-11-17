@@ -1,9 +1,13 @@
+---
+const currentPath = Astro.url.pathname;
+---
 <nav>
-  <a href="/homePage/homePage">Home</a>
-  <a href="/perfilPage/perfilPage">Perfil</a>
-  <a href="/proyecto/proyecto">Proyecto</a>
-  <a href="/proyecto2/proyecto2">Proyecto2</a>
+  <a href="/homePage/homePage" class={currentPath === '/' || currentPath === '/homePage/homePage' ? 'active' : ''}>Home</a>
+  <a href="/perfilPage/perfilPage" class={currentPath === '/perfilPage/perfilPage' ? 'active' : ''}>Perfil</a>
+  <a href="/proyecto/proyecto" class={currentPath === '/proyecto/proyecto' ? 'active' : ''}>Proyectos</a>
+  <a href="/proyecto2/proyecto2" class={currentPath === '/proyecto2/proyecto2' ? 'active' : ''}>Proyectos 2</a>
 </nav>
+
 <style>
   nav {
     background-color: #159;
@@ -13,6 +17,10 @@
     color: white;
     margin-right: 1rem;
     text-decoration: none;
+  }
+  a.active {
+    color: yellow;
+    text-decoration: underline;
   }
   a:hover {
     text-decoration: underline;

@@ -1,0 +1,57 @@
+<section>
+  <div>
+    <h3>Agregar Proyecto</h3>
+    <h4 id="proyectoAgregar">Proyecto a Agregar</h4>
+
+    <input type="text" id="txtName" placeholder="Nombre del Proyecto" />
+    <input type="text" id="txtDescription" placeholder="Descripción del Proyecto" />
+    <button type="button" id="btnAdd">Agregar</button>
+    <button type="button" id="btnDel">Eliminar primero</button>
+  </div>
+
+  <script>
+    import { addProyecto, delProyecto, getProyectos } from '../stores/proyectosStore.js';
+
+    const txtName = document.getElementById("txtName")! as HTMLInputElement;
+    const txtDescription = document.getElementById("txtDescription")! as HTMLInputElement;
+    const btnAdd = document.getElementById("btnAdd")!;
+    const btnDel = document.getElementById("btnDel")!;
+    const lista = document.getElementById("lista")!;
+    const proyectoAgregar = document.getElementById("proyectoAgregar")!;
+
+    function render() {
+      lista.innerHTML = '';
+      getProyectos().forEach(p => {
+        const li = document.createElement("li");
+        li.textContent = `${p.nombre} - ${p.descripcion}`;
+        lista.appendChild(li);
+      });
+    }
+
+    render(); 
+
+    txtName.addEventListener("input", () => {
+      proyectoAgregar.textContent = txtName.value
+        ? `Proyecto a Agregar: ${txtName.value}`
+        : "Proyecto a Agregar";
+    });
+
+    btnAdd.addEventListener("click", () => {
+      const nombre = txtName.value.trim();
+      const descripcion = txtDescription.value.trim();
+
+
+      addProyecto(nombre, descripcion); 
+      render(); 
+
+      txtName.value = "";
+      txtDescription.value = "";
+      proyectoAgregar.textContent = "Proyecto a Agregar"; 
+    });
+
+    btnDel.addEventListener("click", () => {
+      delProyecto();
+      render();
+    });
+  </script>
+</section>

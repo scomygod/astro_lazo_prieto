@@ -1,37 +1,76 @@
 ---
-import ListadoProyectos from "../../components/listado-proyectos.astro";
 import NavBar from "../../components/nav-bar.astro";
 import Layout from "../../layouts/Layout.astro";
-
-const proyectos = [
-{id: 1, nombre: "Proyecto A", descripcion:"Descripción"},
-{id: 2, nombre: "Proyecto B", descripcion:"Otra descipción"}
-];
-
+import ListadoProyectos from "../../components/listado-proyectos.astro";
 ---
 
-<Layout title="Pagina Proyectos">
+<Layout>
   <NavBar />
   <h1>Proyectos</h1>
+
   <section>
     <div>
-      <h3>Agregar Proyectos</h3>
-      <h4>Proyecto a agregar</h4>
-      <input type="text" placeholder="Nombre del proyecto" />
-      <input type="text" placeholder="Descripción del proyecto" />
-      <button type="submit">Agregar</button>
-      <button type="submit">Eliminar</button>
+      <h3>Agregar Proyecto</h3>
+      <h4 id="proyectoAgregar">Proyecto a Agregar</h4>
+      <input
+        type="text"
+        id="txtName"
+        placeholder="Nombre del Proyecto"
+      />
+      <input
+        type="text"
+        id="txtDescription"
+        placeholder="Descripción del Proyecto"
+      />
+      <button type="button" id="btnAdd">Agregar</button>
     </div>
+
     <div>
       <h3>Listado</h3>
-      <ul>
-        <li>Proyecto 1</li>
-        <li>Proyecto 2</li>
-      </ul>
+      <ul id="lista"></ul>
     </div>
+
+    <ListadoProyectos listName="Listado de Proyectos" proyectos={[]} id="lista-componente"/>
   </section>
-  <ListadoProyectos
-    listName="Listado de proyectos" 
-    proyectos={proyectos}
-  />
+
+  <script is:inline>
+    const txtName = document.getElementById("txtName");
+    const txtDescription = document.getElementById("txtDescription");
+    const btnAdd = document.getElementById("btnAdd");
+    const lista = document.getElementById("lista");
+    const proyectoAgregar = document.getElementById("proyectoAgregar");
+    const listaComponente = document.getElementById("lista-componente");
+
+    const proyectos = [
+      { id: 1, nombre: "Proyecto A", descripcion: "Descripción" }
+    ];
+
+    proyectos.forEach(p => {
+      const li = document.createElement("li");
+      li.textContent = `${p.nombre} - ${p.descripcion}`;
+      lista.appendChild(li.cloneNode(true));
+      if (listaComponente) listaComponente.appendChild(li.cloneNode(true));
+    });
+
+    txtName.addEventListener("input", () => {
+      proyectoAgregar.textContent = `Proyecto a Agregar: ${txtName.value}`;
+    });
+
+    btnAdd.addEventListener("click", () => {
+      const nombre = txtName.value.trim();
+      const descripcion = txtDescription.value.trim();
+
+      const nuevoProyecto = { id: Date.now(), nombre, descripcion };
+      proyectos.push(nuevoProyecto);
+
+      const li = document.createElement("li");
+      li.textContent = `${nombre} - ${descripcion}`;
+      lista.appendChild(li.cloneNode(true));
+      if (listaComponente) listaComponente.appendChild(li.cloneNode(true));
+
+      txtName.value = "";
+      txtDescription.value = "";
+      proyectoAgregar.textContent = "Proyecto a Agregar";
+    });
+  </script>
 </Layout>

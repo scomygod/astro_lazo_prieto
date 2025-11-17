@@ -1,11 +1,22 @@
 ---
-const { listName, proyectos } = Astro.props;
+type Proyecto = {
+  id: number;
+  nombre: string;
+  descripcion: string;
+};
+
+type Props = {
+  proyectos?: Proyecto[];
+  listName: string;
+  id?: string; 
+};
+
+const { proyectos = [], listName, id } = Astro.props as Props;
 ---
 
-<h1>{listName}</h1>
-
-<ul>
-  {proyectos.map((p) => (
+<h3>{listName}</h3>
+<ul id={id}>
+  {proyectos.map(p => (
     <li>{p.nombre} - {p.descripcion}</li>
   ))}
 </ul>

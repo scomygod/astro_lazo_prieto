@@ -1,9 +1,17 @@
 ---
-import NavBar from '../../components/nav-bar.astro';
-import Layout from '../../layouts/Layout.astro';
+import NavBar from "../../components/nav-bar.astro";
+import Layout from "../../layouts/Layout.astro";
+import AddProyecto from "../../components/add-proyecto.astro";
+import { getProyectos } from "../../stores/proyectosStore.js";
 ---
 
-<Layout title="Pagina Proyectos2">
-    <NavBar />
-    <p>Componente que agregue al servicio</p>
+<Layout title="Página Proyectos 2">
+  <NavBar />
+  <h1>Listado Proyectos desde Servicio</h1>
+
+  <div id="lista-proyectos">
+    <ul id="lista"></ul>
+  </div>
+
+  <AddProyecto />
 </Layout>
